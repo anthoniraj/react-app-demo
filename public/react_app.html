@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>React App</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="reactApp"></div>
+    <script type="text/babel">
+        function Greet(){
+            return <h1>Hi There</h1>;
+        }
+
+        function isAlphabet(str){
+            var pattern = /^[a-z]+$/i;
+            return pattern.test(str);
+        }
+
+        function TextConvertor(props){
+           
+            const [text, setText] = React.useState('');
+            const handleText = (event)=>{
+                var val = event.target.value;
+                if(isAlphabet(val)){
+                    setText(val.toUpperCase());
+                }else{
+                    setText('');
+                    alert('Only alphabets are allowed!')
+                }
+            }
+            return (
+                <div>
+                    <input type="text" 
+                        value = {text}
+                        onChange={handleText}
+                        style={{color: "red", fontSize: "30px"}}
+                    />
+                    <p>{text}</p>
+                </div>
+            );
+        }
+
+        var virtualDiv = document.getElementById("reactApp");
+        const root = ReactDOM.createRoot(virtualDiv);
+        root.render(
+            <React.StrictMode>
+                <Greet/>
+                <TextConvertor default="Antony"/>
+            </React.StrictMode>
+        );
+
+    </script>
+</body>
+
+</html>
